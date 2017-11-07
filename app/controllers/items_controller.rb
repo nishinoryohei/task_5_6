@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-	before_action :set_item, only:[:show,:ediy,:update,:destroy
+	before_action :authenticate_user!,only:[:new]
+	before_action :set_item, only:[:show,:ediy,:update,:destroy]
 	def new
 		@item = Item.new
 	end
@@ -12,7 +13,7 @@ class ItemsController < ApplicationController
 		end
 	end
 	def index
-		@items = Item.all
+		@items = Item.page(params[:page])
 	end
 	def show
 	end

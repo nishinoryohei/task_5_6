@@ -1,8 +1,18 @@
 <h1>商品一覧</h1>
+<% if user_signed_in? %>
+	<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+	<% if current_user.exhibitor == true %>
+		<%= link_to '出品',new_item_path %>
+	<% end %>
+<% else %>
+	<%= link_to '新規会員登録', new_user_registration_path %>
+	<%= link_to 'ログイン', new_user_session_path %>
+<% end %>
 <% @items.each do |item| %>
 	<div>
 		<%= item.name %>
-		<%= item.price %>
+		<%= item.price %>円
 		<%= item.description %>
 	</div>
 <% end %>
+<%= paginate @items %>
