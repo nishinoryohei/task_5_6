@@ -13,6 +13,10 @@
 		<%= item.name %>
 		<%= item.price %>円
 		<%= item.description %>
+		<% item.thumbnails.each_with_index do |thumbnail,i| %>
+			<%= image_tag thumbnail.image.url %>
+			<% break if i== 0 %>
+		<% end %>
 	</div>
 <% end %>
 <%= paginate @items %>

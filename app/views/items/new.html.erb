@@ -1,10 +1,13 @@
 <h1>出品</h1>
 
-<div>
 <%= form_for(@item) do |f| %>
+<div>
 	<%= f.text_field :name, placeholder: '商品名' %>
 	<%= f.text_area :description, placeholder: '商品説明' %>
 	<%= f.text_field :price, placeholder: '価格' %>
+	<%= f.fields_for :thumbnails do |thumbnail| %>
+		<%= thumbnail.file_field :image %>
+	<% end %>
 	<%= f.submit '出品' %>
-<% end %>
 </div>
+<% end %>
