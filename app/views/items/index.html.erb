@@ -1,22 +1,35 @@
-<h1>商品一覧</h1>
+<h1 class="title">商品一覧</h1>
+<div class='container'>
+<div class="page-header">
 <% if user_signed_in? %>
-	<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+		<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>|
 	<% if current_user.exhibitor == true %>
-		<%= link_to '出品',new_item_path %>
+		<%= link_to '出品',new_item_path %>|
+		<%= link_to '出品した商品一覧', user_path(current_user) %>|
 	<% end %>
 <% else %>
-	<%= link_to '新規会員登録', new_user_registration_path %>
-	<%= link_to 'ログイン', new_user_session_path %>
+	<%= link_to '新規会員登録', new_user_registration_path %>|
+	<%= link_to 'ログイン', new_user_session_path %>|
 <% end %>
+</div>
 <% @items.each do |item| %>
-	<div>
-		<%= item.name %>
-		<%= item.price %>円
-		<%= item.description %>
+	<div class="col-sm-4" >
+		<ul class="media-list">
+		<% unless item.thumbnails.empty? %>
 		<% item.thumbnails.each_with_index do |thumbnail,i| %>
-			<%= image_tag thumbnail.image.url %>
+			<li class="media"><%= image_tag thumbnail.image.url,class: 'thumbnail media-left' %></li>
 			<% break if i== 0 %>
+			<% end %>
+		<% else %>
+			<li class="alt">画像が<br>ありません</li>
 		<% end %>
+		<div class="media-body">
+		<li class="media-heading"><%= link_to item.name, item_path(item),data: {"turbolinks" => false} %></li>
+		<li><%= item.price %>円</li>
+		<li><%= item.description %></li>
+		</div>
+		</ul>
 	</div>
 <% end %>
 <%= paginate @items %>
+</div>

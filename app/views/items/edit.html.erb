@@ -1,4 +1,4 @@
-<h1>出品</h1>
+<h1>商品を編集する</h1>
 <div class="container">
 <%= form_for(@item) do |f| %>
 <div class="form-group">
@@ -9,11 +9,6 @@
 </div>
 <div class="form-group">
 	<%= f.text_field :price, placeholder: '価格',class: 'form-control' %>
-</div>
-	<%= f.fields_for :thumbnails do |thumbnail| %>
-<div class="form-group">
-		<%= thumbnail.file_field :image %>
-	<% end %>
 </div>
 	<%= f.submit '出品' %>
 </div>
