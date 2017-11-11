@@ -1,23 +1,24 @@
-<h1><%= @item.name %></h1>
 <div class="container">
-<div id="container">
-     <div id="theTarget">
-<% @item.thumbnails.each do |thumbnail| %>
-	<%= image_tag thumbnail.image.url ,class: 'skippr-img' %>
-<% end %>
+	<h1><%= @item.name %></h1>
+	<div id="container">
+    	<div id="theTarget">
+			<% @item.thumbnails.each do |thumbnail| %>
+			<%= image_tag thumbnail.image.url ,class: 'skippr-img' %>
+			<% end %>
+		</div>
 	</div>
-</div>
-<div class="panel panel-default">
-	<div class="panel-heading">
+	<div class="panel panel-default">
+		<div class="panel-heading">
 			価格
+		</div>
+		<div class="panel-body">
+			<%= @item.price %>円
+		</div>
+		<div class="panel-heading">
+			商品説明
+		</div>
+		<div class="panel-body">
+		<%= @item.description %>
+		</div>
 	</div>
-<div class="panel-body">
-<%= @item.price %>円
-</div>
-	<div class="panel-heading">
-		商品説明
-	</div>
-<div class="panel-body">
-<%= @item.description %>
-</div>
 </div>

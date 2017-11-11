@@ -6,4 +6,7 @@ class Item < ApplicationRecord
 	validates :name,presence: true
 	validates :description, presence: true
 	validates :price, presence: true ,numericality: :only_integer
+	scope :get_by_price, -> (price){
+		where(price: price..price + 999)
+	}
 end
