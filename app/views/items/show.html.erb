@@ -1,5 +1,6 @@
 <div class="container">
 	<h1><%= @item.name %></h1>
+	<% unless @item.thumbnails.empty? %>
 	<div id="container">
     	<div id="theTarget">
 			<% @item.thumbnails.each do |thumbnail| %>
@@ -7,6 +8,9 @@
 			<% end %>
 		</div>
 	</div>
+	<% else %>
+		<li class="alt">画像が<br>ありません</li>
+	<% end %>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			価格
@@ -21,4 +25,21 @@
 		<%= @item.description %>
 		</div>
 	</div>
+	<h2>カートに商品を入れる</h2>
+	<% if item_in_cart_already? @item.cart %>
+		個数を変更する
+		<%= form_for(:cart,url: item_cart_path(@item),method: :patch) do |f| %>
+			<%= f.select :quantity, options_for_select([1,2,3,4,5]) %>
+			<%= f.submit '個数を変更' %>
+		<% end %>
+	<% else %>
+	<% if stock_nil? @item %>
+		<p>売り切れ</p>
+	<% else %>
+		<%= form_for(:cart,url: item_cart_path(@item)) do |f| %>
+			<%= f.select :quantity, options_for_select([1,2,3,4,5]) %>
+			<%= f.submit 'カートに入れる' %>　
+		<% end %>
+	<% end %>
+	<% end %>
 </div>

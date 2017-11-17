@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
 	def new
 		@item = Item.new
 		4.times{@item.thumbnails.build}
+		@item.build_backyard
 		add_breadcrumb '出品'
 	end
 	def create
@@ -18,7 +19,7 @@ class ItemsController < ApplicationController
 		end
 	end
 	def index
-		@items = Item.page(params[:page]).per(15).includes(:thumbnails)
+		@items = Item.page(params[:page]).per(15).includes(:thumbnails,:backyard)
 		# binding pry
 		unless params[:price].nil?
 			price = params[:price].to_i
@@ -26,7 +27,7 @@ class ItemsController < ApplicationController
 		end
 	end
 	def show
-
+		@cart = Cart.new
 		add_breadcrumb @item.name, :item_path
 	end
 	def edit
@@ -48,7 +49,8 @@ class ItemsController < ApplicationController
 	end
 	def item_params
 		params.require(:item).permit(:name,:description,:price,:user_id,								
-			thumbnails_attributes: [:image])
+			thumbnails_attributes: [:image],
+			backyard_attributes: [:stock])
 	end
 	def correct_user
 		item = Item.find(params[:id])

@@ -10,11 +10,17 @@
 	<div class="form-group">
 		<%= f.text_field :price, placeholder: '価格',class: 'form-control' %>
 	</div>
-		<%= f.fields_for :thumbnails do |thumbnail| %>
-		<div class="form-group">
-		<%= thumbnail.file_field :image %>
+		<%= f.fields_for :backyard do |backyard| %>
+			<div class="form-group">
+				個数
+			<%= backyard.text_field :stock, placeholder: '個数',class: 'form-control' %>
+			</div>
 		<% end %>
-	</div>
+		<%= f.fields_for :thumbnails do |thumbnail| %>
+			<div class="form-group">
+			<%= thumbnail.file_field :image %>
+			</div>
+		<% end %>
 	<%= f.submit '出品' %>
 	<% end %>
 </div>

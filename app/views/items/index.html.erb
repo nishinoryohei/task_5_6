@@ -2,7 +2,7 @@
 <h1 class="title">商品一覧</h1>
 <div class="page-header">
 <% if user_signed_in? %>
-		<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>|
+		<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>|<%= link_to 'カートを確認する', cart_user_path(current_user) %>
 	<% if current_user.exhibitor == true %>
 		<%= link_to '出品',new_item_path %>|
 		<%= link_to '出品した商品一覧', user_path(current_user) %>|
@@ -27,10 +27,15 @@
 		<% else %>
 			<li class="alt">画像が<br>ありません</li>
 		<% end %>
-		<div class="media-body">
+		<div class="media-body"> 
 		<li class="media-heading"><%= link_to item.name, item_path(item),data: {"turbolinks" => false} %></li>
 		<li><%= item.price %>円</li>
 		<li><%= item.description %></li>
+		<% if  stock_nil? item %>
+			<li>売り切れ</li>
+		<% else %>
+			<li>在庫<%= item.backyard.stock %>個</li>
+		<% end %>
 		</div>
 		</ul>
 	</div>

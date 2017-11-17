@@ -1,0 +1,23 @@
+
+<h1>カート一覧</h1>
+		<div class="col-sm-4">
+		<ul class="media-list">
+		<% @user.carts.map {|f| f.item}.each do |item| %> 
+		<% unless item.thumbnails.empty? %>
+		<% item.thumbnails.each_with_index do |thumbnail,i| %>
+			<li class="media"><%= image_tag thumbnail.image.url,class: 'thumbnail media-left' %></li>
+			<% break if i==0 %>
+		<% end %>
+		<% else %>
+			<li class="alt">画像が<br>ありません</li>
+		<% end %>
+		<div class="media-body">
+		<li class="media-header"><%= item.name %></li>
+		<li><%= item.price %>円</li>
+		<li><%= item.description %></li>
+		<%= link_to 'カートから出す', item_cart_path(item),method: :delete %>
+		</div>
+		<% end %>
+		
+	</ul>
+	</div>
