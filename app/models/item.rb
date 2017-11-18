@@ -12,4 +12,5 @@ class Item < ApplicationRecord
 	scope :get_by_price, -> (price){
 		where(price: price..price + 999)
 	}
+
 end

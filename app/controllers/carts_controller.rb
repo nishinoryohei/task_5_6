@@ -31,11 +31,11 @@ class CartsController < ApplicationController
 	def cart_params
 			params.require(:cart).permit(:user_id,:item_id,:quantity)
 	end
-	def item_pick
-		@item.backyard.update(stock: @item.backyard.stock - @cart.quantity)
-	end
-	def item_back
-		@item.backyard.update(stock: @item.backyard.stock + @cart.quantity)
-	end
+	 def item_pick
+	 	@item.backyard.update(stock: @item.backyard.stock - @cart.quantity)
+	 end
+	 def item_back
+	 	@item.backyard.update(stock: @item.backyard.stock + @cart.quantity)
+	 end
 end
 

@@ -13,11 +13,12 @@
 		<% end %>
 		<div class="media-body">
 		<li class="media-header"><%= item.name %></li>
-		<li><%= item.price %>円</li>
+		<li><%= item.cart.quantity %>個　カートにはいっています</li>
+		<li><%= item.price*item.cart.quantity %>円</li>
 		<li><%= item.description %></li>
 		<%= link_to 'カートから出す', item_cart_path(item),method: :delete %>
 		</div>
 		<% end %>
-		
+		<%= @user.carts.map {|f| f.item.price*f.quantity}.sum %>
 	</ul>
 	</div>
