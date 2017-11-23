@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
 		@item = Item.new
 		4.times{@item.thumbnails.build}
 		@item.build_backyard
+		@item.build_category
 		add_breadcrumb '出品'
 	end
 	def create
@@ -50,7 +51,8 @@ class ItemsController < ApplicationController
 	def item_params
 		params.require(:item).permit(:name,:description,:price,:user_id,								
 			thumbnails_attributes: [:image],
-			backyard_attributes: [:stock])
+			backyard_attributes: [:stock, :id],
+			category_attributes: [:color,:area,:id])
 	end
 	def correct_user
 		item = Item.find(params[:id])

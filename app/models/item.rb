@@ -3,9 +3,11 @@ class Item < ApplicationRecord
 	has_one :user
 	has_one :cart
 	has_one :backyard
+	has_one :category
 	has_many :thumbnails ,dependent: :destroy
 	accepts_nested_attributes_for :thumbnails
 	accepts_nested_attributes_for :backyard
+	accepts_nested_attributes_for :category
 	validates :name,presence: true
 	validates :description, presence: true
 	validates :price, presence: true ,numericality: :only_integer

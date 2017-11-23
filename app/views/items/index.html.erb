@@ -11,10 +11,24 @@
 	<%= link_to '新規会員登録', new_user_registration_path %>|
 	<%= link_to 'ログイン', new_user_session_path %>|
 <% end %>
-<%= form_tag(items_path,method:"get") do %>
-	<%= select_tag 'price', options_for_select([1000, 2000,3000,4000]) %>
-	<%= submit_tag '検索' %>
-<% end %>
+<div class='navbar navbar-default'>
+	<div class="collapse navbar-collapse" id="navbarEexample">
+			<ul class="nav navbar-nav">
+				<li class="active"> フランス</li>
+				<li><a href="#">メニューＢ</a></li>
+				<li><a href="#">メニューＣ</a></li>
+			</ul>
+		<div class="navbar-form navbar-right" role='search'>
+			<div class="form-group">
+		<%= form_tag(items_path,method:"get") do %>
+			<%= select_tag 'price',options_for_select([1000, 2000,3000,4000] ),{ autofocus: 'true', class: 'form-control'} %>
+			<%= submit_tag '検索' , class: 'btn btn-default'%>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>
+
 </div>
 <% @items.each do |item| %>
 	<div class="col-sm-4" >
@@ -31,6 +45,8 @@
 		<li class="media-heading"><%= link_to item.name, item_path(item),data: {"turbolinks" => false} %></li>
 		<li><%= item.price %>円</li>
 		<li><%= item.description %></li>
+		<li><%= item.category.color %></li>
+		<li><%= item.category.area_i18n %></li>
 		<% if  stock_nil? item %>
 			<li>売り切れ</li>
 		<% else %>

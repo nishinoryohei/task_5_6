@@ -21,6 +21,12 @@
 			<%= thumbnail.file_field :image %>
 			</div>
 		<% end %>
+		<%= f.fields_for :category do |category| %>
+			<div class="form-group">
+			<%= category.select :color, Category.colors_i18n.invert %>
+			<%= category.select :area, Category.areas_i18n.invert %>
+			</div>
+		<% end %>
 	<%= f.submit '出品' %>
 	<% end %>
 </div>
