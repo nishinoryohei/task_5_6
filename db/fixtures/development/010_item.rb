@@ -1,4 +1,4 @@
-100.times do |i|
+200.times do |i|
 	Item.seed(:id) do |item|
 		item.id = i + 1
 		item.name = "#{i + 1}個目の商品名"

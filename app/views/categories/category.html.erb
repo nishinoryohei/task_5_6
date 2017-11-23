@@ -1,12 +1,11 @@
-
 <div class='container'>
-<h1 class="title">商品一覧</h1>
+<h1 class="title"><%= @category.first.area_i18n %></h1>
 <%= render 'layouts/header' %>
-		<%= form_tag(items_path,method:"get") do %>
+<%= form_tag(category_path,method:"get") do %>
 			<%= select_tag 'price',options_for_select([1000, 2000,3000,4000] ),class: 'form-control'%>
 			<%= submit_tag '検索' , class: 'btn btn-default'%>
 		<% end %>
-<% @items.each do |item| %>
+<% @category.map{|f| f.item}.each do |item| %>
 	<div class="col-sm-4" >
 		<ul class="media-list">
 		<% unless item.thumbnails.empty? %>
@@ -22,7 +21,7 @@
 		<li><%= item.price %>円</li>
 		<li><%= item.description %></li>
 		<li><%= item.category.color_i18n %></li>
-		<li><%= item.category.area_i18n %>産</li>
+		<li><%= item.category.area_i18n %></li>
 		<% if  stock_nil? item %>
 			<li>売り切れ</li>
 		<% else %>
@@ -32,5 +31,5 @@
 		</ul>
 	</div>
 <% end %>
-<%= paginate @items %>
+<%= paginate @category %>
 </div>

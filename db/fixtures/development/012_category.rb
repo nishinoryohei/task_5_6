@@ -1,4 +1,4 @@
-100.times do |i|
+200.times do |i|
 	Category.seed(:id) do |category|
 		category.id = i + 1
 		category.item_id = i + 1

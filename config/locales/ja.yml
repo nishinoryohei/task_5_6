@@ -1,15 +1,15 @@
 ja:
   enums:
-    catagory:
-        area:
+    category:
+      area:
           france: 'フランス'
           italy: 'イタリア'
           spain: 'スペイン'
           germany: 'ドイツ'
           america: 'アメリカ'
-          japan: 日本'
+          japan: '日本'
           australia: 'オーストラリア'
           newzealand: 'ニュージーランド'
-        color:
+      color:
           red: '赤'
           white: '白'

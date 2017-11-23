@@ -1,0 +1,26 @@
+<div class="page-header">
+<% if user_signed_in? %>
+		<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>|<%= link_to 'カートを確認する', cart_user_path(current_user) %>
+	<% if current_user.exhibitor == true %>
+		<%= link_to '出品',new_item_path %>|
+		<%= link_to '出品した商品一覧', user_path(current_user) %>|
+	<% end %>
+<% else %>
+	<%= link_to '新規会員登録', new_user_registration_path %>|
+	<%= link_to 'ログイン', new_user_session_path %>|
+<% end %>
+
+<div class='navbar navbar-default'>
+	<div class="collapse navbar-collapse" id="navbarEexample">
+			<ul class="nav navbar-nav">
+				<li><%= link_to 'フランス',category_path(10)%></li>
+				<li><%= link_to 'イタリア',category_path(20)%></li>
+				<li><%= link_to 'スペイン',category_path(30)%></li>
+				<li><%= link_to 'ドイツ',category_path(40)%></li>
+				<li><%= link_to 'アメリカ',category_path(50)%></li>
+				<li><%= link_to '日本',category_path(60)%></li>
+				<li><%= link_to 'オーストラリア',category_path(70)%></li>
+				<li><%= link_to 'ニュージーランド',category_path(80)%></li>
+			</ul>
+	</div>
+</div>

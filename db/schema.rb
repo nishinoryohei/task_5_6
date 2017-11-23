@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171123034327) do
+=======
+ActiveRecord::Schema.define(version: 20171115085430) do
+>>>>>>> origin/test
 
   create_table "backyards", force: :cascade do |t|
     t.integer "stock", default: 1
@@ -27,6 +31,7 @@ ActiveRecord::Schema.define(version: 20171123034327) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   create_table "categories", force: :cascade do |t|
     t.integer "area"
     t.integer "color"
@@ -35,6 +40,8 @@ ActiveRecord::Schema.define(version: 20171123034327) do
     t.datetime "updated_at", null: false
   end
 
+=======
+>>>>>>> origin/test
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.text "description"

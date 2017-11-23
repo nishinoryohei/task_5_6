@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 	resources :items do
 		resource :cart, only:[:create,:update,:destroy,]
 	end
+  get '/category/:area' => 'categories#category',as: :category
 	root 'items#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
