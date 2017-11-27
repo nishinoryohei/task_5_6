@@ -4,10 +4,11 @@ Rails.application.routes.draw do
         registrations: 'users/registrations'
       }
     resources :users,only:[:show] do
-      get :cart, on: :member
+      resource :cart, only:[:show]
+      resource :order, only:[:create,:show]  
   end
 	resources :items do
-		resource :cart, only:[:create,:update,:destroy,]
+		resource :cart, only:[:create,:update,:destroy]
 	end
   get '/category/:area' => 'categories#category',as: :category
 	root 'items#index'

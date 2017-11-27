@@ -8,9 +8,6 @@ class Item < ApplicationRecord
 	accepts_nested_attributes_for :thumbnails
 	accepts_nested_attributes_for :backyard
 	accepts_nested_attributes_for :category
-	has_many :thumbnails ,dependent: :destroy
-	accepts_nested_attributes_for :thumbnails
-	accepts_nested_attributes_for :backyard
 	validates :name,presence: true
 	validates :description, presence: true
 	validates :price, presence: true ,numericality: :only_integer
