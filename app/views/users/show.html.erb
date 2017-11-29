@@ -1,24 +1,28 @@
-<h1><%= @user.name %></h1>
 <div class="container">
-	<% @user.items.each do |item| %>
-	<div class="col-sm-4">
+	<div class="title"><%= @user.name %></div>
+		<%= @user.email %>
+		<%= @user.personal.prefecture.name %>
+		<%= @user.personal.city %>
+		<%= @user.personal.address %>
+		<%= @user.personal.tel %>
+		購入済みの商品
 		<ul class="media-list">
-		<% unless item.thumbnails.empty? %>
-		<% item.thumbnails.each_with_index do |thumbnail,i| %>
-			<li class="media"><%= image_tag thumbnail.image.url,class: 'thumbnail media-left' %></li>
-			<% break if i==0 %>
+		<%  @user.carts.each do |cart| %>
+			<% unless item_purchase_already? cart %>			
+				<% unless cart.item.thumbnails.empty? %>
+					<% cart.item.thumbnails.each_with_index do |thumbnail,i| %>
+						<li class="media"><%= image_tag thumbnail.image.url,class: 'thumbnail media-left' %></li>
+					<% break if i==0 %>
+					<% end %>
+				<% else %>
+					<li class="alt">画像が<br>ありません</li>
+				<% end %>
+				<div class="media-body">
+					<li class="media-header"><%= cart.item.name %></li>
+					<li><%= cart.item.cart.quantity %>個　カートにはいっています</li>
+					<li><%= cart.item.price*cart.item.cart.quantity %>円</li>
+					<li><%= cart.item.description %></li>
+				</div>
+			<% end %>
 		<% end %>
-		<% else %>
-			<li class="alt">画像が<br>ありません</li>
-		<% end %>
-		<div class="media-body">
-		<li class="media-header"><%= item.name %></li>
-		<li><%= item.price %>円</li>
-		<li><%= item.description %></li>
-		</div>
-		<li><%= link_to '編集する',edit_item_path(item) %></li>
-		<li><%= link_to '削除する', item_path(item), method: :delete %>
-	</ul>
-	</div>
-	<% end %>
 </div>

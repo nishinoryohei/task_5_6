@@ -3,9 +3,13 @@ Rails.application.routes.draw do
         sessions: 'users/sessions',
         registrations: 'users/registrations'
       }
-    resources :users,only:[:show] do
+    resources :users,only:[:show,:edit,:update] do
       resource :cart, only:[:show]
       resource :order, only:[:create,:show]  
+      get :exhibitor, on: :member
+  end
+  if Rails.env.development?
+  mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
 	resources :items do
 		resource :cart, only:[:create,:update,:destroy]

@@ -3,8 +3,7 @@
 	<div class="col-sm-4">
 		<ul class="media-list">
 		<% @cart.each do |cart| %>
-			<% if cart.is_purchase == true %>
-				
+			<% if item_purchase_already? cart %>			
 				<% unless cart.item.thumbnails.empty? %>
 					<% cart.item.thumbnails.each_with_index do |thumbnail,i| %>
 						<li class="media"><%= image_tag thumbnail.image.url,class: 'thumbnail media-left' %></li>
@@ -20,7 +19,6 @@
 					<li><%= cart.item.description %></li>
 					<li><%= link_to 'カートから出す', item_cart_path(cart.item),method: :delete %></li>
 				</div>
-			
 			<% end %>
 		<% end %>
 		<li>合計<%= user_item_total_fee current_user %>円</li>
@@ -28,13 +26,23 @@
 	</div>
 <h2>購入する</h2>
 <div class='col-sm-4'>
-<%= form_for(@personal, url: user_order_path(current_user)) do |f| %>
-		<div class="form-group">
-		<%= f.collection_select :state, JpPrefecture::Prefecture.all, :code, :name %>
-		<%= f.text_field :city, placeholder: '市区町村',class: 'form-control' %>
-		<%= f.text_field :address, placeholder: '丁目、番地',class: 'form-control' %>
-		<%= f.text_field :tel, placeholder: '電話番号',class: 'form-control' %>
-		</div>
-	<%= f.submit '購入' %>
+<% unless current_user.personal.present? %>
+	<%= form_for(@personal, url: user_order_path(current_user)) do |f| %>
+			<div class="form-group">
+			<%= f.collection_select :state, JpPrefecture::Prefecture.all, :code, :name %>
+			<%= f.text_field :city, placeholder: '市区町村',class: 'form-control' %>
+			<%= f.text_field :address, placeholder: '丁目、番地',class: 'form-control' %>
+			<%= f.text_field :tel, placeholder: '電話番号',class: 'form-control' %>
+			</div>
+		<%= f.submit '購入' %>
+	<% end %>
+<% else %>
+	<%= @personal.prefecture.name %>
+	<%= @personal.city %>
+	<%= @personal.address %>
+	<%= @personal.tel %>
+	<%= current_user.email %>
 <% end %>
+	<%= link_to '購入者情報を変更する', user_path(current_user) %>
+	<%= link_to '購入する', user_order_path(current_user),method: :post%>
 </div>

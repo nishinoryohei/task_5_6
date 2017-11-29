@@ -15,7 +15,11 @@ class CartsController < ApplicationController
 	end
 	 def show
 	 	@cart = Cart.where(user_id: current_user.id)
-	 	@personal = Personal.new
+	 	unless current_user.personal.present?
+	 		@personal = Personal.new
+	 	else
+	 		@personal = Personal.find_by(user_id: current_user)
+	 	end
 	 end
 	def update
 		@cart = Cart.find_by(item_id: @item)

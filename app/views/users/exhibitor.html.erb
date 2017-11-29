@@ -1,0 +1,29 @@
+<h1><%= @user.name %></h1>
+<div class="container">
+	<% @user.orders.each do |order| %>
+		<%= order.user.name %>
+		<%= order.order_date %>
+		<%= order.total_fee %>
+	<% end %>
+	<% @user.items.each do |item| %>
+	<div class="col-sm-4">
+		<ul class="media-list">
+		<% unless item.thumbnails.empty? %>
+		<% item.thumbnails.each_with_index do |thumbnail,i| %>
+			<li class="media"><%= image_tag thumbnail.image.url,class: 'thumbnail media-left' %></li>
+			<% break if i==0 %>
+		<% end %>
+		<% else %>
+			<li class="alt">画像が<br>ありません</li>
+		<% end %>
+		<div class="media-body">
+		<li class="media-header"><%= item.name %></li>
+		<li><%= item.price %>円</li>
+		<li><%= item.description %></li>
+		</div>
+		<li><%= link_to '編集する',edit_item_path(item) %></li>
+		<li><%= link_to '削除する', item_path(item), method: :delete %>
+	</ul>
+	</div>
+	<% end %>
+</div>

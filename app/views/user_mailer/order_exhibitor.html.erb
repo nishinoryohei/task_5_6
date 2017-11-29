@@ -1,0 +1,16 @@
+商品が購入されました
+
+
+<% @purchase_item.each do |item| %>
+<ul class="media-list">
+	<div class="media-body"> 
+		<li class="media-heading"><%= item.name %></li>
+		<li><%= item.price %>円</li>
+		<li><%= item.description %></li>
+		<li><%= item.category.color_i18n %></li>
+		<li><%= item.category.area_i18n %></li>
+	</div>
+</ul>
+<% end %>
+
+<%= link_to '履歴を見る', exhibitor_user_url(@user) %>

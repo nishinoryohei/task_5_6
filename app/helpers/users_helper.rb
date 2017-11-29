@@ -1,7 +1,11 @@
 module UsersHelper
 	def user_item_total_fee user
-		user.carts.map {|f| f.item.price*f.quantity}.sum
-	end
-	def item_purchase_already? user
+		user.carts.map {|f| 
+			if f.is_purchase == true
+				f.item.price*f.quantity
+			else
+				nil.to_i
+			end
+		}.sum
 	end
 end
