@@ -21,7 +21,6 @@ class ItemsController < ApplicationController
 	end
 	def index
 		@items = Item.page(params[:page]).per(15).includes(:thumbnails,:backyard,:category)
-		# binding pry
 		unless params[:price].nil?
 			price = params[:price].to_i
 			@items = @items.get_by_price price

@@ -3,7 +3,7 @@
 	<div class="col-sm-4">
 		<ul class="media-list">
 		<% @cart.each do |cart| %>
-			<% if item_purchase_already? cart %>			
+			<% if cart.is_purchase == true %>			
 				<% unless cart.item.thumbnails.empty? %>
 					<% cart.item.thumbnails.each_with_index do |thumbnail,i| %>
 						<li class="media"><%= image_tag thumbnail.image.url,class: 'thumbnail media-left' %></li>
@@ -14,8 +14,8 @@
 				<% end %>
 				<div class="media-body">
 					<li class="media-header"><%= cart.item.name %></li>
-					<li><%= cart.item.cart.quantity %>個　カートにはいっています</li>
-					<li><%= cart.item.price*cart.item.cart.quantity %>円</li>
+					<li><%= cart.quantity %>個　カートにはいっています</li>
+					<li><%= cart.item.price*cart.quantity %>円</li>
 					<li><%= cart.item.description %></li>
 					<li><%= link_to 'カートから出す', item_cart_path(cart.item),method: :delete %></li>
 				</div>
@@ -37,12 +37,14 @@
 		<%= f.submit '購入' %>
 	<% end %>
 <% else %>
-	<%= @personal.prefecture.name %>
-	<%= @personal.city %>
-	<%= @personal.address %>
-	<%= @personal.tel %>
-	<%= current_user.email %>
+<ul class="list-group">
+	<li class="list-group-item"><%= current_user.email %></li>
+	<li class="list-group-item"><%= @personal.prefecture.name %></li>
+	<li class="list-group-item"><%= @personal.city %></li>
+	<li class="list-group-item"><%= @personal.address %></li>
+	<li class="list-group-item"><%= @personal.tel %></li>
+	</ul>
 <% end %>
-	<%= link_to '購入者情報を変更する', user_path(current_user) %>
+	<%= link_to '購入者情報を変更する', user_path(current_user) %>|
 	<%= link_to '購入する', user_order_path(current_user),method: :post%>
 </div>

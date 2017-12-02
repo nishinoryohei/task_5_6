@@ -1,16 +1,12 @@
-
 <div class='container'>
-<h1 class="title">ワインのECサイト</h1>
+<h1 class="title">購入履歴</h1>
 <%= render 'layouts/header' %>
 <% flash.each do |message_type, message| %>
 	<div class="alert alert-<%= message_type %>"><%= message %>
 	</div>
-	<% end %>
-		<%= form_tag(items_path,method:"get") do %>
-			<%= select_tag 'price',options_for_select([1000, 2000,3000,4000] ),class: 'form-control'%>
-			<%= submit_tag '検索' , class: 'btn btn-default'%>
-		<% end %>
-<% @items.each do |item| %>
+<% end %>
+<% @order.each do |order| %>
+<% order.carts.map{|f| f.item}.each do |item| %> 
 	<div class="col-sm-4" >
 		<ul class="media-list">
 		<% unless item.thumbnails.empty? %>
@@ -36,5 +32,5 @@
 		</ul>
 	</div>
 <% end %>
-<div class='page'><%= paginate @items %></div>
+<% end %>
 </div>

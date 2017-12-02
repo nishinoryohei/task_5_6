@@ -1,0 +1,11 @@
+<div class="container">
+	<%= form_for(@personal, url: user_path) do |f| %>
+			<div class="form-group">
+			<%= f.collection_select :state, JpPrefecture::Prefecture.all, :code, :name %>
+			<%= f.text_field :city, placeholder: '市区町村',class: 'form-control' %>
+			<%= f.text_field :address, placeholder: '丁目、番地',class: 'form-control' %>
+			<%= f.text_field :tel, placeholder: '電話番号',class: 'form-control' %>
+			</div>
+		<%= f.submit '変更'%>
+	<% end %>
+</div>

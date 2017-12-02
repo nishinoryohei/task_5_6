@@ -1,7 +1,10 @@
 <div class="page-header">
 <% if user_signed_in? %>
-		<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>|<%= link_to 'カートを確認する', user_cart_path(current_user) %>
+		<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>|<%= link_to 'カートを確認する', user_cart_path(current_user) %>|
+		<%= link_to 'マイページ', user_path(current_user) %>|
+		<%= link_to '購入履歴', user_order_path(current_user) %>
 	<% if current_user.exhibitor == true %>
+		（出品者向け）
 		<%= link_to '出品',new_item_path %>|
 		<%= link_to '出品した商品一覧', exhibitor_user_path(current_user) %>|
 	<% end %>

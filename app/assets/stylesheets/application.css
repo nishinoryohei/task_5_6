@@ -69,3 +69,7 @@ a:link, a:visited,a:hover,a:active{
     color: #468847;
     text-align: left;
  }
+ .page{
+ 	width: 300px;
+ 	margin: 0 auto;
+ }

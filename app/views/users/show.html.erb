@@ -1,28 +1,13 @@
 <div class="container">
-	<div class="title"><%= @user.name %></div>
-		<%= @user.email %>
-		<%= @user.personal.prefecture.name %>
-		<%= @user.personal.city %>
-		<%= @user.personal.address %>
-		<%= @user.personal.tel %>
-		購入済みの商品
-		<ul class="media-list">
-		<%  @user.carts.each do |cart| %>
-			<% unless item_purchase_already? cart %>			
-				<% unless cart.item.thumbnails.empty? %>
-					<% cart.item.thumbnails.each_with_index do |thumbnail,i| %>
-						<li class="media"><%= image_tag thumbnail.image.url,class: 'thumbnail media-left' %></li>
-					<% break if i==0 %>
-					<% end %>
-				<% else %>
-					<li class="alt">画像が<br>ありません</li>
-				<% end %>
-				<div class="media-body">
-					<li class="media-header"><%= cart.item.name %></li>
-					<li><%= cart.item.cart.quantity %>個　カートにはいっています</li>
-					<li><%= cart.item.price*cart.item.cart.quantity %>円</li>
-					<li><%= cart.item.description %></li>
-				</div>
-			<% end %>
-		<% end %>
+	<div class="jumbotron">
+		<h1> <%= @user.name %></h1>
+	<ul class="list-group">
+	<li class="list-group-item"><%= @user.email %></li>
+	<li class="list-group-item"><%= @user.personal.prefecture.name %></li>
+	<li class="list-group-item"><%= @user.personal.city %></li>
+	<li class="list-group-item"><%= @user.personal.address %></li>
+	<li class="list-group-item"><%= @user.personal.tel %></li>
+	</ul>
+	<%= link_to 'プロフィール変更', edit_user_path(current_user),class: "btn btn-primary"%>
+</div>
 </div>

@@ -1,15 +1,14 @@
 module ItemsHelper
-	def stock_nil?(item)
+	def stock_nil? item
 		item.backyard.stock == 0		
 	end
-	def item_in_cart_already? cart
-		if user_signed_in?
-			unless cart.nil?  
-			cart.user_id == current_user.id
-			end
+	def item_in_cart_already? carts
+		cart = carts.first	
+		if cart.present? && cart.is_purchase == true
+		 	cart.user_id == current_user.id
 		end
 	end
-	def item_purchase_already? cart
-		cart.is_purchase == true
+	def sold_item item_id
+		Item.find(item_id)
 	end
 end

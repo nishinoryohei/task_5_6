@@ -6,11 +6,13 @@ class CartsController < ApplicationController
 		@cart.item_id = @item.id
 		@cart.user_id = current_user.id
 		unless item_pick == false
-		 	if @cart.save 
+		 	if @cart.save
 		 		redirect_to items_path
 		 	else
 		 		redirect_to item_path(@item)
 		 	end
+		 else
+		 	redirect_to items_path
 		end
 	end
 	 def show

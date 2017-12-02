@@ -8,4 +8,7 @@ module UsersHelper
 			end
 		}.sum
 	end
+	def buyer user_id
+  		User.find(user_id)
+	end
 end
