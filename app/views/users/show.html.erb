@@ -1,6 +1,7 @@
 <div class="container">
 	<div class="jumbotron">
 		<h1> <%= @user.name %></h1>
+		<% unless @user.personal.nil? %>
 	<ul class="list-group">
 	<li class="list-group-item"><%= @user.email %></li>
 	<li class="list-group-item"><%= @user.personal.prefecture.name %></li>
@@ -9,5 +10,8 @@
 	<li class="list-group-item"><%= @user.personal.tel %></li>
 	</ul>
 	<%= link_to 'プロフィール変更', edit_user_path(current_user),class: "btn btn-primary"%>
+	<% else %>
+	<li class='list-group-item'>まだ購入者情報は登録されていません</li>
+	<% end %>
 </div>
 </div>

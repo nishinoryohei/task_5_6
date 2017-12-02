@@ -1,6 +1,10 @@
 
 <h1>カート一覧</h1>
 	<div class="col-sm-4">
+		<% flash.each do |message_type, message| %>
+		<div class="alert alert-<%= message_type %>"><%= message %>
+		</div>
+		<% end %>
 		<ul class="media-list">
 		<% @cart.each do |cart| %>
 			<% if cart.is_purchase == true %>			
@@ -32,7 +36,7 @@
 			<%= f.collection_select :state, JpPrefecture::Prefecture.all, :code, :name %>
 			<%= f.text_field :city, placeholder: '市区町村',class: 'form-control' %>
 			<%= f.text_field :address, placeholder: '丁目、番地',class: 'form-control' %>
-			<%= f.text_field :tel, placeholder: '電話番号',class: 'form-control' %>
+			<%= f.text_field :tel, placeholder: 'TEL:〇〇〇ー〇〇〇〇ー〇〇〇〇(間にハイフンを入れてください）',class: 'form-control' %>
 			</div>
 		<%= f.submit '購入' %>
 	<% end %>
@@ -44,7 +48,18 @@
 	<li class="list-group-item"><%= @personal.address %></li>
 	<li class="list-group-item"><%= @personal.tel %></li>
 	</ul>
-<% end %>
 	<%= link_to '購入者情報を変更する', user_path(current_user) %>|
 	<%= link_to '購入する', user_order_path(current_user),method: :post%>
+<% end %>
 </div>
+<% if @personal.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= @personal.errors.count %>件のエラーがあります。</h2>
+ 
+    <ul>
+    <% @personal.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
