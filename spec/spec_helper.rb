@@ -14,7 +14,16 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  # rspec-expectations config goes here. You can use an alternate
+
+
+  # config.before(:suite) do
+  #   SeedFu.seed
+  #   # DatabaseCleaner削除の対象外テーブルを設定(使っていない場合は不要)
+  #   # seed_tables = %w(table_name)
+  #   # DatabaseCleaner.strategy = :truncation, {:except => seed_tables}
+  #   # DatabaseCleaner.clean_with(:truncation, {:except => seed_tables})
+  # end
+  # # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
   config.expect_with :rspec do |expectations|

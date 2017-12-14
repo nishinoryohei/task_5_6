@@ -4,5 +4,6 @@
 		user.name = "#{i + 1}号"
 		user.email = "#{i + 1}@a"
 		user.password = "#{i + 1}00000"
+		user.exhibitor = true
 	end
 end
